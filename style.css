@@ -1,0 +1,91 @@
+body{
+    background-color:#404040;
+}
+h1,h2,h3,h4,h5,h6{
+    color: whitesmoke;
+}
+
+p{
+    size: 69px;
+    color: whitesmoke;
+    text-align: left;
+}
+a{
+    color:whitesmoke;
+}
+p.outset{border-style: outset;}
+
+.imgrez{
+    max-width: 100%;
+    max-height: 60%;    
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    grid-row-gap: 0.1%;
+    grid-column-gap: 0.1%;
+    background-color: #202020;
+    padding: 1%;
+    justify-content: space-evenly;
+    align-content: space-around;
+}
+.grid-container > div {
+    text-align: center;
+    padding: 1%;
+}
+.tekst {
+    background-color: rgba(60, 60, 60, 1);
+    text-align: justify;
+    padding: 1% ;
+    font-size: 100%;
+    size:100%;
+    grid-column: 1 / span 5;
+}
+.button-grid {
+    background-color: rgba(255, 60, 60, 0);
+    size:22%;
+}
+.buttlarge {
+    background-color: rgba(255,60,60,0);
+    size: 100%;
+    grid-column: 1/span 5;
+}
+.butt1{
+    background-color: rgba(60, 60, 60, 1);
+    border-style: solid;
+    border-color: #202020;
+    width: 100%;
+    height: 100px;
+    font-size: 100%;
+    color: whitesmoke;
+    transition-duration: 1s;
+    padding:1%;
+}
+
+.butt1:hover {
+    background-color: whitesmoke;
+    color: black;
+}
+.four{
+    grid-column: 1 / span 5;
+    background-color: rgba(60, 60, 60, 1);
+    size:100%;
+}
+.one{
+    grid-column: 1 / span 1;
+    background-color: rgba(60, 60, 60, 1);
+    size:100%;
+}
+.two{
+    grid-column: 2 / span 2;
+    background-color: rgba(60, 60, 60, 1);
+    size:100%;
+}
+#game{
+    grid-column: 1/span 5;
+    position: relative;
+    display: flex;
+    Align-items: center;
+    justify-content: center;
+}
