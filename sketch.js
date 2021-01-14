@@ -20,13 +20,13 @@ function setup() {
 //verdier for forskellige arrays
     for (let i = 0; i < antB; i++) {
         //random diameter
-        ds[i] = random(10, 15)
+        ds[i] = random(10, 30)
         //spawn location
         x[i] = random(ds[i], width - ds[i]);
         y[i] = random(ds[i], height - ds[i]);
         //hastighed på x og y
-        vx[i] = random(-2,2)
-        vy[i] = random(-2,2)
+        vx[i] = random(-4,4)
+        vy[i] = random(-4,4)
         //farve
         r[i] = random(0,255)
         g[i] = random(0,255)
@@ -42,21 +42,22 @@ function draw() {
         fill(r[i],g[i],b[i])
 //cirkler bliver tegnet
         circle(x[i], y[i], ds[i]);
+        rect(x[i]-(ds[i-2]/2), y[i]-(ds[i-1]/2), ds[i-2],ds[i-1]);
 //hastighed til cirkler.
         x[i] += vx[i];
         y[i] += vy[i];
 //restriktioner
-        if (x[i] > width - ds[i]) {
-            vx[i] = -vx[i];
+        if (x[i] > width + ds[i]+1) {
+            x[i]=0-ds[i]
         }
-        if (x[i] < ds[i]) {
-            vx[i] = -vx[i];
+        if (x[i] < -ds[i]-1) {
+            x[i]=width+ds[i]
         }
-        if (y[i] > height - ds[i]) {
-            vy[i] = -vy[i];
+        if (y[i] > height + ds[i]+1) {
+            y[i]=-ds[i]
         }
-        if (y[i] < ds[i]) {
-            vy[i] = -vy[i];
+        if (y[i] < -ds[i]-1) {
+            y[i]= height+ds[i];
         }
     }
 }
