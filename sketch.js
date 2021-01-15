@@ -12,7 +12,7 @@ function setup() {
     createCanvas(600, 700);
     ship = new Ship();
     for (var i = 0; i < ants; i++) {
-        asteroids.push(new Asteroid())
+        asteroids.push(new asteroid())
     }
 }
 // makes the magic happen
@@ -29,9 +29,18 @@ function draw() {
         asteroids[i].update();
         asteroids[i].edges();
     }
-    for (var i = 0; i < lasers.length; i++) {
+    for (var i = lasers.length-1; i >= 0; i--) {
         lasers[i].render();
         lasers[i].update();
+        for (var j = asteroids.length-1; j >= 0; j--) {
+            if (lasers[i].hits(asteroids[j])) {
+                var newAsteroids = asteroids[j].breakup();
+                asteroids = asteroids.concat(newAsteroids);
+                asteroids.splice(j,1)
+                lasers.splice(i,1);
+                break;
+            }
+        }
     }
 }
 // stopper skibet fra at rotere
