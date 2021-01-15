@@ -1,3 +1,4 @@
+let distribution = new Array(360);
 //skibet bliver defineret
 var ship;
 //definere asteroid
@@ -14,6 +15,9 @@ function setup() {
     for (var i = 0; i < ants; i++) {
         asteroids.push(new asteroid())
     }
+    for (let i = 0; i < distribution.length; i++) {
+        distribution[i] = floor(randomGaussian(0, 15));
+      }
 }
 // makes the magic happen
 function draw() {
@@ -25,24 +29,32 @@ function draw() {
     ship.update();
     ship.edges();
     for (var i = 0; i < asteroids.length; i++) {
+        if (ship.hits(asteroids[i])) {
+            console.log('av')
+        }
         asteroids[i].render();
         asteroids[i].update();
         asteroids[i].edges();
     }
-    for (var i = lasers.length-1; i >= 0; i--) {
+    for (var i = lasers.length - 1; i >= 0; i--) {
         lasers[i].render();
         lasers[i].update();
-        for (var j = asteroids.length-1; j >= 0; j--) {
+        for (var j = asteroids.length - 1; j >= 0; j--) {
             if (lasers[i].hits(asteroids[j])) {
-                var newAsteroids = asteroids[j].breakup();
-                asteroids = asteroids.concat(newAsteroids);
-                asteroids.splice(j,1)
-                lasers.splice(i,1);
+                if (asteroids[j].r > 10) {
+                    var newAsteroids = asteroids[j].breakup();
+                    asteroids = asteroids.concat(newAsteroids);
+                } else {
+                    //increase score
+                }
+                asteroids.splice(j, 1)
+                lasers.splice(i, 1);
                 break;
             }
         }
     }
 }
+
 // stopper skibet fra at rotere
 function keyReleased() {
     if (keyCode == RIGHT_ARROW) {

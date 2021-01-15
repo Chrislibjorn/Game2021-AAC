@@ -22,7 +22,6 @@ function asteroid(pos, r) {
 
         push();
         translate(this.pos.x, this.pos.y);
-        // circle(0,0,this.r*2)
         beginShape();
 
         for (var i = 0; i < this.total; i++) {
