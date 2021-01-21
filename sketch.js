@@ -11,7 +11,7 @@ var lasers = [];
 //rotationshastighed
 const Rotspd = 0.1
 function setup() {
-    createCanvas(600, 700);
+    createCanvas(600, windowHeight-100);
     ship = new Ship();
     for (var i = 0; i < ants; i++) {
         asteroids.push(new asteroid())
