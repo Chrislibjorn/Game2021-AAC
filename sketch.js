@@ -1,4 +1,5 @@
-let distribution = new Array(360);
+var sprites;
+var spriteplay = false;
 //skibet bliver defineret
 var ship;
 //definere asteroid
@@ -15,9 +16,7 @@ function setup() {
     for (var i = 0; i < ants; i++) {
         asteroids.push(new asteroid())
     }
-    for (let i = 0; i < distribution.length; i++) {
-        distribution[i] = floor(randomGaussian(0, 15));
-      }
+    sprites = new sprite();
 }
 // makes the magic happen
 function draw() {
@@ -45,7 +44,7 @@ function draw() {
                     var newAsteroids = asteroids[j].breakup();
                     asteroids = asteroids.concat(newAsteroids);
                 } else {
-                    //increase score
+                    
                 }
                 asteroids.splice(j, 1)
                 lasers.splice(i, 1);
