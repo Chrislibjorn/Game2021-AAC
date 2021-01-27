@@ -2,13 +2,16 @@ var deads = true;
 var imortal = false;
 var imortalframe
 var menu;
-
+var hud;
+var levels;
 //skibet bliver defineret
 var ship;
 //definere asteroid
 var asteroids = [];
+//start level
+let antStart = 1;
 //antal asteroider
-var ants = 10
+var ants;
 //laser array
 var lasers = [];
 //rotationshastighed
@@ -18,6 +21,7 @@ function setup() {
     frameRate(60);
     ship = new Ship();
     menu = new Menu();
+    hud = new Hud();
 }
 // makes the magic happen
 function draw() {
@@ -29,9 +33,11 @@ function draw() {
     ship.update();
     ship.edges();
     var imortalframeDif = frameCount - imortalframe;
-
+    let ants = levels *1.1+antStart;
     if (deads) {
         menu.render();
+    } else {
+        hud.render();
     }
     if (imortalframeDif < 180) {
         imortal = true;
@@ -42,7 +48,6 @@ function draw() {
         for (var i = 0; i < asteroids.length; i++) {
             if (ship.hits(asteroids[i]) && imortal == false) {
                 deads = true;
-
             }
             asteroids[i].render();
             asteroids[i].edges();
@@ -64,6 +69,9 @@ function draw() {
             }
         }
     }
+    if (deads == true) {
+        asteroids.length = 0;
+    }
     //tæller ned til udødelighed stopper
     {
         let countDown = map(imortalframeDif, 0, 180, 3, 1)
@@ -76,9 +84,19 @@ function draw() {
             pop()
         }
     }
-    if(asteroids.length == 0){
-        deads = true;
+    if (deads == true) {
+        levels=1;
     }
+    if (deads == false && asteroids.length == 0) {
+        for (var i = 0; i < ants; i++) {
+            if (asteroids.length < ants) {
+                asteroids.push(new asteroid())
+            }
+            imortalframe = frameCount
+        }
+        levels++;
+    }
+    console.log(levels);
 }
 
 // stopper skibet fra at rotere
@@ -94,7 +112,7 @@ function keyReleased() {
 
 // for skibet til at rotere
 function keyPressed() {
-    if (key == ' ' && imortal == false) {
+    if (key == ' ' && imortal == false && deads == false) {
         lasers.push(new Laser(ship.pos, ship.heading));
     } else if (keyCode == RIGHT_ARROW) {
         ship.setRotation(Rotspd);
@@ -105,7 +123,7 @@ function keyPressed() {
     }
 }
 function mousePressed() {
-    if (mouseX < 220 && mouseY < 220 && deads == true) {
+    if ((mouseX < 220 && mouseY < 220 && deads == true)) {
         deads = false
         imortalframe = frameCount
         //tilføjer nye asteroider.
