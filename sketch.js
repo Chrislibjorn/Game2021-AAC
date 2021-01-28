@@ -1,17 +1,17 @@
-var deads = true;
-var imortal = false;
-var imortalframe
-var menu;
-var hud;
-var levels;
+let deads = true;
+let imortal = false;
+let imortalframe
+let menu;
+let hud;
+let levels;
 //skibet bliver defineret
-var ship;
+let ship;
 //definere asteroid
-var asteroids = [];
+let asteroids = [];
 //antal asteroider
-var ants;
+let ants;
 //laser array
-var lasers = [];
+let lasers = [];
 //rotationshastighed
 const Rotspd = 0.07
 function setup() {
@@ -30,8 +30,8 @@ function draw() {
     ship.turn();
     ship.update();
     ship.edges();
-    var imortalframeDif = frameCount - imortalframe;
-    let ants = levels * 1.1;
+    let imortalframeDif = frameCount - imortalframe;
+    let ants = floor(levels * 1.1);
     if (deads) {
         menu.render();
     } else {
@@ -43,7 +43,7 @@ function draw() {
         imortal = false;
     }
     if (deads == false) {
-        for (var i = 0; i < asteroids.length; i++) {
+        for (let i = 0; i < asteroids.length; i++) {
             if (ship.hits(asteroids[i]) && imortal == false) {
                 deads = true;
             }
@@ -51,18 +51,25 @@ function draw() {
             asteroids[i].edges();
             asteroids[i].update();
         }
-        for (var i = lasers.length - 1; i >= 0; i--) {
+        for (let i = lasers.length - 1; i >= 0; i--) {
             lasers[i].render();
             lasers[i].update();
-            for (var j = asteroids.length - 1; j >= 0; j--) {
-                if (lasers[i].hits(asteroids[j])) {
-                    if (asteroids[j].r > 15) {
-                        var newAsteroids = asteroids[j].breakup();
-                        asteroids = asteroids.concat(newAsteroids);
+            //handle laser offscreen
+            if (lasers[i].offScreen()) {
+                lasers.splice(i, 1);
+                console.log('remove laser' + i);
+            } else {
+                for (let j = asteroids.length - 1; j >= 0; j--) {
+                    if (lasers[i].hits(asteroids[j])) {
+                        if (asteroids[j].r > 15) {
+                            let newAsteroids = asteroids[j].breakup();
+                            asteroids = asteroids.concat(newAsteroids);
+                        }
+                        asteroids.splice(j, 1);
+                        lasers.splice(i, 1);
+                        console.log('hit');
+                        break;
                     }
-                    asteroids.splice(j, 1)
-                    lasers.splice(i, 1);
-                    break;
                 }
             }
         }
@@ -83,10 +90,10 @@ function draw() {
         }
     }
     if (deads == true) {
-        levels = 1;
+        levels = 20;
     }
     if (deads == false && asteroids.length == 0) {
-        for (var i = 0; i < ants; i++) {
+        for (let i = 0; i < ants; i++) {
             if (asteroids.length < ants) {
                 asteroids.push(new asteroid())
             }
@@ -94,7 +101,11 @@ function draw() {
         }
         levels++;
     }
-    console.log(levels);
+    // console.log(round(ship.pos.x))
+    // console.log(menu.stX);
+    if (ship.pos.x < 200) {
+        // console.log('pog')
+    }
 }
 
 // stopper skibet fra at rotere

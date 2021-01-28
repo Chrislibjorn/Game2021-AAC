@@ -23,4 +23,14 @@ function Laser(spos, angle) {
             return false;
         }
     }
+    //undersøg om laser er uden for skærmen.
+    this.offScreen = function () {
+        let result = (
+            this.pos.x > width ||
+            this.pos.x < 0 ||
+            this.pos.y > height ||
+            this.pos.y < 0
+        )
+        return result;
+    }
 }

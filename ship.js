@@ -38,6 +38,7 @@ function Ship() {
             return false;
         }
     }
+
     this.render = function () {
         push();
         translate(this.pos.x, this.pos.y)
