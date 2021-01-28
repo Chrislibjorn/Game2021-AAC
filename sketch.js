@@ -31,7 +31,7 @@ function draw() {
     ship.update();
     ship.edges();
     let imortalframeDif = frameCount - imortalframe;
-    let ants = floor(levels * 1.1);
+    let ants = floor(levels * 1.5);
     if (deads) {
         menu.render();
     } else {
@@ -57,7 +57,6 @@ function draw() {
             //handle laser offscreen
             if (lasers[i].offScreen()) {
                 lasers.splice(i, 1);
-                console.log('remove laser' + i);
             } else {
                 for (let j = asteroids.length - 1; j >= 0; j--) {
                     if (lasers[i].hits(asteroids[j])) {
@@ -67,7 +66,6 @@ function draw() {
                         }
                         asteroids.splice(j, 1);
                         lasers.splice(i, 1);
-                        console.log('hit');
                         break;
                     }
                 }
@@ -90,7 +88,7 @@ function draw() {
         }
     }
     if (deads == true) {
-        levels = 20;
+        levels = 1;
     }
     if (deads == false && asteroids.length == 0) {
         for (let i = 0; i < ants; i++) {
@@ -103,9 +101,9 @@ function draw() {
     }
     // console.log(round(ship.pos.x))
     // console.log(menu.stX);
-    if (ship.pos.x < 200) {
-        // console.log('pog')
-    }
+    // if (ship.pos.x < 200) {
+    //     // console.log('pog')
+    // }
 }
 
 // stopper skibet fra at rotere
