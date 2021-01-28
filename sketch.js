@@ -8,14 +8,12 @@ var levels;
 var ship;
 //definere asteroid
 var asteroids = [];
-//start level
-let antStart = 1;
 //antal asteroider
 var ants;
 //laser array
 var lasers = [];
 //rotationshastighed
-const Rotspd = 0.1
+const Rotspd = 0.07
 function setup() {
     createCanvas(600, windowHeight - 100);
     frameRate(60);
@@ -33,7 +31,7 @@ function draw() {
     ship.update();
     ship.edges();
     var imortalframeDif = frameCount - imortalframe;
-    let ants = levels *1.1+antStart;
+    let ants = levels * 1.1;
     if (deads) {
         menu.render();
     } else {
@@ -85,7 +83,7 @@ function draw() {
         }
     }
     if (deads == true) {
-        levels=1;
+        levels = 1;
     }
     if (deads == false && asteroids.length == 0) {
         for (var i = 0; i < ants; i++) {
