@@ -99,11 +99,7 @@ function draw() {
         }
         levels++;
     }
-    // console.log(round(ship.pos.x))
-    // console.log(menu.stX);
-    // if (ship.pos.x < 200) {
-    //     // console.log('pog')
-    // }
+
 }
 
 // stopper skibet fra at rotere

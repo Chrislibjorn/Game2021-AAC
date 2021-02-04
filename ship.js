@@ -4,9 +4,9 @@ function Ship() {
     //størrelse på rumskib
     this.r = 20;
     //model på trekant
-    this.heading = 0;
+    this.heading = PI*1.5;
     //rotation
-    this.rotation = 0;
+    this.rotation =0;
     this.vel = createVector(0, 0);
 
     this.isBoosting = false;
