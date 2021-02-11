@@ -15,7 +15,8 @@ let lasers = [];
 //rotationshastighed
 const Rotspd = 0.07
 function setup() {
-    createCanvas(600, windowHeight - 100);
+    let canvas = createCanvas(windowWidth-100,windowHeight -100 );
+    canvas.parent(game)
     frameRate(60);
     ship = new Ship();
     menu = new Menu();
