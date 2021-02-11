@@ -20,7 +20,7 @@ function Ship() {
             this.boost();
         }
         this.pos.add(this.vel);
-        //friction på trekanten
+        //friction på rumskibet gør de langsommere.
         this.vel.mult(0.99)
     }
 
@@ -38,17 +38,23 @@ function Ship() {
             return false;
         }
     }
-
+    //tegner skibet
     this.render = function () {
         push();
+        fill(100)
+        stroke(0)
+        strokeWeight(1.5)
         translate(this.pos.x, this.pos.y)
         rotate(this.heading + PI / 2);
+        rect(0-2,-this.r-3,4,20);
         triangle(-this.r, this.r, this.r, this.r, 0, -this.r)
-        square(4, this.r, 10)
-        square(-14, this.r, 10)
+        square(4, this.r, 10);
+        square(-14, this.r, 10);
+        fill(0,200,255);
+        ellipse(0,0,10,15);
         if (this.isBoosting) {
-            noFill
-            stroke(255, 100, 0)
+            fill(255,100,0);
+            stroke(255, 0, 0);
             triangle(-14, 10 + this.r, -4, 10 + this.r, -8, 2.2 * (this.r))
             triangle(14, 10 + this.r, 4, 10 + this.r, 8, 2.2 * (this.r))
         }

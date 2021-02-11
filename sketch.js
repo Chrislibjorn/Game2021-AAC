@@ -1,8 +1,14 @@
+//død
 let deads = true;
+//udøddelig
 let imortal = false;
+//det frame hvor udødeligheden starter
 let imortalframe
+//bestemmer om menu bliver vist
 let menu;
+//tegner levels 
 let hud;
+//hvilket level der er aktivt
 let levels;
 //skibet bliver defineret
 let ship;
@@ -18,14 +24,15 @@ function setup() {
     let canvas = createCanvas(windowWidth-100,windowHeight -100 );
     canvas.parent(game)
     frameRate(60);
+    img = loadImage('stjerne2.jpg')  
     ship = new Ship();
     menu = new Menu();
     hud = new Hud();
 }
 // makes the magic happen
 function draw() {
-    background(0);
-    noFill();
+    // background(0);
+    image(img,0,0,width,height);
     stroke(255)
     ship.render();
     ship.turn();
@@ -76,12 +83,13 @@ function draw() {
     if (deads == true) {
         asteroids.length = 0;
     }
-    //tæller ned til udødelighed stopper
+    //tæller ned til udødelighed stopper og skriver det på skærmen
     {
         let countDown = map(imortalframeDif, 0, 180, 3, 1)
         let countDownRound = round(countDown,);
         if (deads == false && imortalframeDif < 180) {
             push()
+            noFill();
             textSize(80)
             textAlign(CENTER, CENTER)
             text(countDownRound, width / 2, 100)

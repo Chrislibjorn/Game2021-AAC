@@ -21,6 +21,9 @@ function asteroid(pos, r) {
     this.render = function () {
 
         push();
+        fill(100);
+        strokeWeight(6)
+        stroke(50);
         translate(this.pos.x, this.pos.y);
         beginShape();
 

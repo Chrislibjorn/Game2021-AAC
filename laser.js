@@ -1,7 +1,7 @@
 function Laser(spos, angle) {
     this.vel = p5.Vector.fromAngle(angle);
     this.start = p5.Vector.fromAngle(angle);
-    this.start.mult(ship.r);
+    this.start.mult(ship.r+5);
     this.pos = createVector(spos.x, spos.y);
     this.vel.mult(10);
     this.pos.add(this.start);
@@ -11,13 +11,14 @@ function Laser(spos, angle) {
     }
     this.render = function () {
         push();
+        stroke(0,255,100)
         strokeWeight(3)
         circle(this.pos.x, this.pos.y, 3)
         pop();
     }
     this.hits = function (asteroid) {
         var d = dist(this.pos.x, this.pos.y, asteroid.pos.x, asteroid.pos.y)
-        if (d < asteroid.r) {
+        if (d < asteroid.r+8) {
             return true;
         } else {
             return false;

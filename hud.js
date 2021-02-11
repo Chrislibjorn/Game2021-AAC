@@ -6,6 +6,7 @@ function Hud() {
         this.stW = 200
         this.stH = 100
         push();
+        noFill();
         rect(this.stx, this.sty, this.stW, this.stH);
         textSize(80)
         textAlign(CENTER, CENTER)
